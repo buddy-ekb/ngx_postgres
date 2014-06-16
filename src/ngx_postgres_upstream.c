@@ -355,10 +355,13 @@ ngx_postgres_upstream_get_peer(ngx_peer_connection_t *pc, void *data)
                             &peer->host, peer->port, &peer->dbname, &peer->user,
                             &peer->password);
     else
+        /* TODO: use port. NOTE: this is a STRING (socket file name extension) for AF_UNIX, not a number!
+        cf: http://www.postgresql.org/docs/9.3/static/libpq-connect.html#LIBPQ-PARAMKEYWORDS
+        */
         last = ngx_snprintf(connstring, len - 1,
-                            "host=%s port=%d dbname=%V user=%V password=%V"
+                            "host=%s dbname=%V user=%V password=%V"
                             " sslmode=disable",
-                            &peer->host.data[5], peer->port, &peer->dbname, &peer->user,
+                            &peer->host.data[5], &peer->dbname, &peer->user,
                             &peer->password);
     *last = '\0';
 
