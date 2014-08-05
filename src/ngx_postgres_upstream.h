@@ -53,7 +53,7 @@ typedef struct {
     ngx_postgres_state_t               state;
     ngx_str_t                          query;
     ngx_str_t                          name;
-    struct sockaddr                    sockaddr;
+    struct sockaddr_un                 sockaddr;
     unsigned                           failed;
 } ngx_postgres_upstream_peer_data_t;
 

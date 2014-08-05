@@ -103,7 +103,7 @@ ngx_postgres_keepalive_get_peer_single(ngx_peer_connection_t *pc,
 
         pc->name = &pgp->name;
 
-        pc->sockaddr = &pgp->sockaddr;
+        pc->sockaddr = (struct sockaddr *)&pgp->sockaddr;
         pc->socklen = item->socklen;
 
         dd("returning NGX_DONE");
